@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dent Assist – Premium Dental Care</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: { preflight: false },
+      prefix: 'tw-',
+    }
+  </script>
+  <style>
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeInLeft { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes fadeInRight { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes float { 0%,100% { transform:translateY(0px); } 50% { transform:translateY(-18px); } }
+    @keyframes pulse-ring { 0% { transform:scale(0.95); box-shadow:0 0 0 0 rgba(37,99,235,0.5); } 70% { transform:scale(1); box-shadow:0 0 0 16px rgba(37,99,235,0); } 100% { transform:scale(0.95); } }
+    @keyframes shimmer { 0% { background-position:-200% center; } 100% { background-position:200% center; } }
+    @keyframes countUp { from { opacity:0; transform:scale(0.5); } to { opacity:1; transform:scale(1); } }
+    .anim-fade-up { animation: fadeInUp 0.7s ease forwards; }
+    .anim-fade-left { animation: fadeInLeft 0.8s ease forwards; }
+    .anim-fade-right { animation: fadeInRight 0.8s ease forwards; }
+    .anim-float { animation: float 4s ease-in-out infinite; }
+    .anim-pulse-ring { animation: pulse-ring 2s ease-in-out infinite; }
+    .delay-100 { animation-delay: 0.1s; opacity:0; }
+    .delay-200 { animation-delay: 0.2s; opacity:0; }
+    .delay-300 { animation-delay: 0.3s; opacity:0; }
+    .delay-400 { animation-delay: 0.4s; opacity:0; }
+    .delay-500 { animation-delay: 0.5s; opacity:0; }
+    .delay-600 { animation-delay: 0.6s; opacity:0; }
+    .shimmer-text { background: linear-gradient(90deg,#fff 0%,#93c5fd 40%,#fff 60%,#93c5fd 100%); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:shimmer 3s linear infinite; }
+    .card-hover { transition: all 0.35s cubic-bezier(.4,0,.2,1); }
+    .card-hover:hover { transform:translateY(-10px) scale(1.02); box-shadow:0 25px 50px rgba(37,99,235,0.18); }
+    .glass { background:rgba(255,255,255,0.08); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); }
+    .gradient-border { position:relative; }
+    .gradient-border::before { content:''; position:absolute; inset:-2px; background:linear-gradient(135deg,#2563eb,#06b6d4,#7c3aed); border-radius:inherit; z-index:-1; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-brand" onclick="showSection('home')">
+    <div class="brand-icon"><i class="fas fa-tooth"></i></div>
+    <span>Dent<span class="brand-accent">Assist</span></span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" onclick="showSection('home')">Home</a></li>
+    <li><a href="#" onclick="showSection('about')">About</a></li>
+    <li><a href="#" onclick="showSection('services')">Services</a></li>
+    <li><a href="#" onclick="showSection('dentists-list')">Dentists</a></li>
+    <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span id="navUser" class="nav-user"></span>
+    <button id="dashboardBtn" class="btn-nav-outline" onclick="goToDashboard()" style="display:none">Dashboard</button>
+    <button id="logoutBtn" class="btn-nav-outline" onclick="logout()" style="display:none">Logout</button>
+    <button id="loginNavBtn" class="btn-nav" onclick="showSection('login')">Login</button>
+    <button id="registerNavBtn" class="btn-nav-outline" onclick="showSection('register')">Register</button>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+</nav>
+
+<!-- ═══════════════════════════════ HOME ═══════════════════════════════ -->
+<section id="home" class="section active">
+  <div class="hero2-wrap">
+    <div class="hero2-bg-shape hero2-shape1"></div>
+    <div class="hero2-bg-shape hero2-shape2"></div>
+
+    <!-- LEFT -->
+    <div class="hero2-left anim-fade-left delay-100">
+      <span class="hero2-eyebrow"><i class="fas fa-tooth"></i> Dental Appointment Platform</span>
+      <h1 class="hero2-title">Find a Dentist.<br/>Book in Minutes.<br/><span class="hero2-accent">Smile Confidently.</span></h1>
+      <p class="hero2-desc">Skip the phone calls and long waits. Search verified dentists by location, pick a time that works for you, and confirm your booking instantly.</p>
+      <div class="hero2-btns">
+        <button class="btn-primary" onclick="showSection('register')" style="padding:14px 32px;font-size:1rem;"><i class="fas fa-calendar-plus"></i> Book Appointment</button>
+        <button class="btn-ghost" onclick="showSection('dentists-list')" style="padding:14px 32px;font-size:1rem;"><i class="fas fa-search"></i> Find Dentists</button>
+      </div>
+      <div class="hero2-tags">
+        <span><i class="fas fa-map-marker-alt"></i> Search by Location</span>
+        <span><i class="fas fa-shield-alt"></i> Verified Dentists</span>
+        <span><i class="fas fa-clock"></i> AM / PM Slots</span>
+        <span><i class="fas fa-lock"></i> Secure Booking</span>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="hero2-right anim-fade-right delay-200">
+      <div class="hero2-img-card">
+        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=700&q=85" alt="Dentist at work"/>
+        <div class="hero2-img-overlay"></div>
+        <div class="hero2-float-badge hero2-badge-tl">
+          <i class="fas fa-user-md"></i>
+          <div><strong>Verified Dentist</strong><span>Background checked</span></div>
+        </div>
+        <div class="hero2-float-badge hero2-badge-br">
+          <i class="fas fa-calendar-check" style="color:#34d399"></i>
+          <div><strong>Instant Booking</strong><span>Confirmed in seconds</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div style="background:linear-gradient(135deg,#2563eb,#06b6d4);padding:14px 0;overflow:hidden;">
+    <div class="marquee">
+      <span><i class="fas fa-tooth"></i> General Dentistry</span><span><i class="fas fa-smile"></i> Teeth Whitening</span><span><i class="fas fa-teeth"></i> Orthodontics</span><span><i class="fas fa-tooth"></i> Root Canal</span><span><i class="fas fa-smile-beam"></i> Cosmetic Dentistry</span><span><i class="fas fa-teeth-open"></i> Dental Implants</span><span><i class="fas fa-tooth"></i> Pediatric Dentistry</span><span><i class="fas fa-smile"></i> Teeth Whitening</span><span><i class="fas fa-teeth"></i> Orthodontics</span><span><i class="fas fa-tooth"></i> Root Canal</span>
+    </div>
+  </div>
+  <!-- HOW IT WORKS -->
+  <div style="padding:5rem 5%;background:#f8faff;">
+    <div style="text-align:center;margin-bottom:4rem;">
+      <div class="section-label">Simple Process</div>
+      <h2 class="section-title">Book Your Appointment in <span class="gradient-text">3 Easy Steps</span></h2>
+      <p style="color:#64748b;max-width:500px;margin:0 auto;font-size:0.95rem;line-height:1.7;">Getting dental care has never been easier. Follow these simple steps and smile brighter.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;position:relative;">
+      <!-- Step 1 -->
+      <div class="card-hover anim-fade-up delay-100" style="background:white;border-radius:20px;padding:2.5rem 2rem;box-shadow:0 8px 32px rgba(37,99,235,0.1);border:1px solid #e2e8f0;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:linear-gradient(135deg,rgba(37,99,235,0.08),rgba(6,182,212,0.08));border-radius:50%;"></div>
+        <div style="width:56px;height:56px;background:linear-gradient(135deg,#2563eb,#06b6d4);border-radius:16px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.4rem;margin-bottom:1.5rem;box-shadow:0 8px 20px rgba(37,99,235,0.3);">
+          <i class="fas fa-search"></i>
+        </div>
+        <div style="position:absolute;top:1.5rem;right:1.5rem;width:32px;height:32px;background:#eff6ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#2563eb;font-size:0.85rem;">1</div>
+        <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:0.75rem;color:#0f172a;">Find Your Dentist</h3>
+        <p style="color:#64748b;font-size:0.9rem;line-height:1.7;">Browse our network of verified dental specialists. Filter by specialization, availability, or location.</p>
+        <div style="margin-top:1.5rem;display:flex;align-items:center;gap:8px;color:#2563eb;font-size:0.85rem;font-weight:600;">Browse Dentists <i class="fas fa-arrow-right"></i></div>
+      </div>
+      <!-- Step 2 -->
+      <div class="card-hover anim-fade-up delay-200" style="background:white;border-radius:20px;padding:2.5rem 2rem;box-shadow:0 8px 32px rgba(124,58,237,0.1);border:1px solid #e2e8f0;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(240,147,251,0.08));border-radius:50%;"></div>
+        <div style="width:56px;height:56px;background:linear-gradient(135deg,#7c3aed,#f093fb);border-radius:16px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.4rem;margin-bottom:1.5rem;box-shadow:0 8px 20px rgba(124,58,237,0.3);">
+          <i class="fas fa-calendar-plus"></i>
+        </div>
+        <div style="position:absolute;top:1.5rem;right:1.5rem;width:32px;height:32px;background:#f5f3ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#7c3aed;font-size:0.85rem;">2</div>
+        <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:0.75rem;color:#0f172a;">Pick a Time Slot</h3>
+        <p style="color:#64748b;font-size:0.9rem;line-height:1.7;">Choose a date and time that works for you. Morning, afternoon, or evening � your schedule, your choice.</p>
+        <div style="margin-top:1.5rem;display:flex;align-items:center;gap:8px;color:#7c3aed;font-size:0.85rem;font-weight:600;">View Availability <i class="fas fa-arrow-right"></i></div>
+      </div>
+      <!-- Step 3 -->
+      <div class="card-hover anim-fade-up delay-300" style="background:white;border-radius:20px;padding:2.5rem 2rem;box-shadow:0 8px 32px rgba(16,185,129,0.1);border:1px solid #e2e8f0;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(67,233,123,0.08));border-radius:50%;"></div>
+        <div style="width:56px;height:56px;background:linear-gradient(135deg,#10b981,#43e97b);border-radius:16px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.4rem;margin-bottom:1.5rem;box-shadow:0 8px 20px rgba(16,185,129,0.3);">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div style="position:absolute;top:1.5rem;right:1.5rem;width:32px;height:32px;background:#ecfdf5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#10b981;font-size:0.85rem;">3</div>
+        <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:0.75rem;color:#0f172a;">Confirm &amp; Smile</h3>
+        <p style="color:#64748b;font-size:0.9rem;line-height:1.7;">Confirm your booking instantly. Get a reminder before your visit and walk in stress-free.</p>
+        <div style="margin-top:1.5rem;display:flex;align-items:center;gap:8px;color:#10b981;font-size:0.85rem;font-weight:600;">Book Now <i class="fas fa-arrow-right"></i></div>
+      </div>
+    </div>
+    <!-- bottom trust bar -->
+    <div style="margin-top:3rem;background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:20px;padding:2rem 3rem;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:1.5rem;">
+      <div style="display:flex;align-items:center;gap:12px;color:white;"><i class="fas fa-shield-alt" style="font-size:1.5rem;color:#34d399;"></i><div><div style="font-weight:700;font-size:0.95rem;">100% Secure</div><div style="font-size:0.8rem;opacity:0.7;">Your data is safe with us</div></div></div>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.2);"></div>
+      <div style="display:flex;align-items:center;gap:12px;color:white;"><i class="fas fa-user-md" style="font-size:1.5rem;color:#60a5fa;"></i><div><div style="font-weight:700;font-size:0.95rem;">Verified Doctors</div><div style="font-size:0.8rem;opacity:0.7;">All dentists are certified</div></div></div>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.2);"></div>
+      <div style="display:flex;align-items:center;gap:12px;color:white;"><i class="fas fa-clock" style="font-size:1.5rem;color:#fbbf24;"></i><div><div style="font-weight:700;font-size:0.95rem;">Instant Booking</div><div style="font-size:0.8rem;opacity:0.7;">Confirm in under a minute</div></div></div>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.2);"></div>
+      <div style="display:flex;align-items:center;gap:12px;color:white;"><i class="fas fa-tooth" style="font-size:1.5rem;color:#f9a8d4;"></i><div><div style="font-weight:700;font-size:0.95rem;">All Specializations</div><div style="font-size:0.8rem;opacity:0.7;">From general to cosmetic</div></div></div>
+    </div>
+  </div>
+  <div class="section-block" id="reviewsSection">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">What People <span class="gradient-text">Say</span></h2>
+      <p style="color:#64748b;margin-top:0.5rem;">Real reviews from real patients</p>
+    </div>
+    <div class="reviews-layout">
+      <!-- Submit Review Form -->
+      <div class="review-form-panel">
+        <h3 class="review-panel-title"><i class="fas fa-pen"></i> Leave a Review</h3>
+        <form onsubmit="submitReview(event)">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="reviewName" placeholder="Enter your name" required/>
+          </div>
+          <div class="form-group">
+            <label>Rating</label>
+            <div id="starRating" style="display:flex;gap:8px;font-size:1.8rem;cursor:pointer;margin-top:4px;">
+              <span onclick="setRating(1)" class="star" style="color:#d1d5db;">&#9733;</span>
+              <span onclick="setRating(2)" class="star" style="color:#d1d5db;">&#9733;</span>
+              <span onclick="setRating(3)" class="star" style="color:#d1d5db;">&#9733;</span>
+              <span onclick="setRating(4)" class="star" style="color:#d1d5db;">&#9733;</span>
+              <span onclick="setRating(5)" class="star" style="color:#d1d5db;">&#9733;</span>
+            </div>
+            <input type="hidden" id="reviewRating" value="0"/>
+          </div>
+          <div class="form-group">
+            <label>Your Review</label>
+            <textarea id="reviewMessage" placeholder="Share your experience..." rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary full-width"><i class="fas fa-paper-plane"></i> Submit Review</button>
+        </form>
+        <div id="reviewMsg" class="msg"></div>
+      </div>
+      <!-- Reviews List Panel -->
+      <div class="review-list-panel">
+        <h3 class="review-panel-title"><i class="fas fa-comments"></i> Patient Reviews</h3>
+        <div id="reviewsList" class="reviews-list-wrap">
+          <p style="color:#64748b;text-align:center;padding:2rem;">Loading reviews...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="background:linear-gradient(135deg,#1e3a8a,#2563eb,#06b6d4);padding:5rem 2rem;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-80px;left:-80px;width:300px;height:300px;background:rgba(255,255,255,0.05);border-radius:50%;"></div>
+    <div style="position:absolute;bottom:-80px;right:-80px;width:350px;height:350px;background:rgba(255,255,255,0.05);border-radius:50%;"></div>
+    <div style="position:relative;z-index:1;">
+      <div style="font-size:3rem;margin-bottom:1rem;">&#129463;</div>
+      <h2 style="font-size:2.5rem;font-weight:800;color:white;margin-bottom:1rem;">Ready for a Healthier Smile?</h2>
+      <p style="color:rgba(255,255,255,0.8);font-size:1.1rem;margin-bottom:2rem;">Join thousands of patients who trust Dent Assist for their dental care.</p>
+      <button class="btn-white" onclick="showSection('register')" style="font-size:1rem;padding:14px 36px;">Get Started Today <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ ABOUT ═══════════════════════════════ -->
+<section id="about" class="section">
+  <div class="page-hero" style="background:linear-gradient(135deg,#1e3a8a,#2563eb)">
+    <h1>About Dent Assist</h1>
+    <p>Connecting patients with the best dental professionals</p>
+  </div>
+  <div class="section-block">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=700&q=85" alt="Dental Care"/>
+        <div class="about-badge"><i class="fas fa-tooth"></i> Est. 2026</div>
+      </div>
+      <div class="about-text">
+        <div class="section-label">Our Story</div>
+        <h2>We Make Dental Care <span class="gradient-text">Accessible</span></h2>
+        <p>Dent Assist was built by students of Terna Engineering College with one goal — make it easier for people to find and book trusted dental professionals without the hassle of long waits or confusing processes.</p>
+        <p style="margin-top:1rem">We connect patients directly with verified dentists across multiple specializations. Whether it's a routine checkup or a specific treatment, our platform makes the entire journey smooth — from search to confirmation.</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-block alt-bg">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">Meet Our <span class="gradient-text">Specialists</span></h2>
+      <p style="color:#64748b;font-size:0.95rem;max-width:500px;margin:0 auto;">Verified dental professionals ready to give you the best care.</p>
+    </div>
+    <div id="aboutDentistGrid" class="about-dentist-grid">
+      <div class="about-dentist-loading"><i class="fas fa-spinner fa-spin"></i> Loading specialists...</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SERVICES ═══════════════════════════════ -->
+<section id="services" class="section">
+
+  <!-- HERO -->
+  <div class="svc2-hero">
+    <div class="svc2-hero-blob svc2-blob1"></div>
+    <div class="svc2-hero-blob svc2-blob2"></div>
+    <div class="svc2-hero-blob svc2-blob3"></div>
+    <div class="svc2-hero-inner">
+      <span class="svc2-pill"><i class="fas fa-route"></i>&nbsp; How It Works</span>
+      <h1>Your Journey to a <span class="svc2-grad">Healthier Smile</span></h1>
+      <p>Book a dental appointment in 5 easy steps � fast, secure, and stress-free.</p>
+    </div>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="svc2-progress-bar">
+    <div class="svc2-pb-track">
+      <div class="svc2-pb-fill"></div>
+    </div>
+    <div class="svc2-pb-dots">
+      <div class="svc2-pb-dot active" style="--dc:#6366f1"><span>1</span></div>
+      <div class="svc2-pb-dot" style="--dc:#0ea5e9"><span>2</span></div>
+      <div class="svc2-pb-dot" style="--dc:#10b981"><span>3</span></div>
+      <div class="svc2-pb-dot" style="--dc:#f59e0b"><span>4</span></div>
+      <div class="svc2-pb-dot" style="--dc:#ef4444"><span>5</span></div>
+    </div>
+  </div>
+
+  <!-- STEPS GRID -->
+  <div class="svc2-steps">
+
+    <div class="svc2-card" style="--cc:#6366f1;--cl:#eef2ff">
+      <div class="svc2-card-top">
+        <div class="svc2-icon-wrap" style="background:linear-gradient(135deg,#6366f1,#818cf8)">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <div class="svc2-step-num">01</div>
+      </div>
+      <h3>Register / Login</h3>
+      <p>Create your free account or sign in. Your profile securely stores your dental history and preferences.</p>
+      <ul>
+        <li><i class="fas fa-circle-check"></i> Quick email sign-up</li>
+        <li><i class="fas fa-circle-check"></i> Secure JWT auth</li>
+        <li><i class="fas fa-circle-check"></i> Personal dashboard</li>
+      </ul>
+      <button onclick="showSection('register')">Get Started <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <div class="svc2-arrow"><i class="fas fa-chevron-right"></i></div>
+
+    <div class="svc2-card" style="--cc:#0ea5e9;--cl:#f0f9ff">
+      <div class="svc2-card-top">
+        <div class="svc2-icon-wrap" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8)">
+          <i class="fas fa-search-location"></i>
+        </div>
+        <div class="svc2-step-num">02</div>
+      </div>
+      <h3>Search Dentist</h3>
+      <p>Browse verified dental professionals near you. Filter by location and find the right specialist instantly.</p>
+      <ul>
+        <li><i class="fas fa-circle-check"></i> Search by location</li>
+        <li><i class="fas fa-circle-check"></i> View specializations</li>
+        <li><i class="fas fa-circle-check"></i> Check availability</li>
+      </ul>
+      <button onclick="showSection('dentists-list')">Find Dentists <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <div class="svc2-arrow"><i class="fas fa-chevron-right"></i></div>
+
+    <div class="svc2-card" style="--cc:#10b981;--cl:#ecfdf5">
+      <div class="svc2-card-top">
+        <div class="svc2-icon-wrap" style="background:linear-gradient(135deg,#10b981,#34d399)">
+          <i class="fas fa-id-card"></i>
+        </div>
+        <div class="svc2-step-num">03</div>
+      </div>
+      <h3>View Profile</h3>
+      <p>Review the dentist's credentials, working hours, available days, and patient ratings before you decide.</p>
+      <ul>
+        <li><i class="fas fa-circle-check"></i> Verified credentials</li>
+        <li><i class="fas fa-circle-check"></i> Hours &amp; availability</li>
+        <li><i class="fas fa-circle-check"></i> Star ratings</li>
+      </ul>
+      <button onclick="showSection('dentists-list')">Browse Profiles <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <div class="svc2-arrow"><i class="fas fa-chevron-right"></i></div>
+
+    <div class="svc2-card" style="--cc:#f59e0b;--cl:#fffbeb">
+      <div class="svc2-card-top">
+        <div class="svc2-icon-wrap" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="svc2-step-num">04</div>
+      </div>
+      <h3>Select Date &amp; Time</h3>
+      <p>Pick a date and your preferred AM or PM time slot. Flexible scheduling that fits your busy life.</p>
+      <ul>
+        <li><i class="fas fa-circle-check"></i> Flexible date picker</li>
+        <li><i class="fas fa-circle-check"></i> AM / PM slots</li>
+        <li><i class="fas fa-circle-check"></i> Live availability</li>
+      </ul>
+      <button onclick="showSection('register')">Pick a Slot <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <div class="svc2-arrow"><i class="fas fa-chevron-right"></i></div>
+
+    <div class="svc2-card" style="--cc:#ef4444;--cl:#fef2f2">
+      <div class="svc2-card-top">
+        <div class="svc2-icon-wrap" style="background:linear-gradient(135deg,#ef4444,#f87171)">
+          <i class="fas fa-check-double"></i>
+        </div>
+        <div class="svc2-step-num">05</div>
+      </div>
+      <h3>Confirm Booking</h3>
+      <p>Review your details and confirm. Your dentist is notified instantly � track everything from your dashboard.</p>
+      <ul>
+        <li><i class="fas fa-circle-check"></i> Instant confirmation</li>
+        <li><i class="fas fa-circle-check"></i> Dentist notified</li>
+        <li><i class="fas fa-circle-check"></i> Dashboard tracking</li>
+      </ul>
+      <button onclick="showSection('register')">Book Now <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+  </div>
+
+  <!-- CTA BANNER -->
+  <div class="svc2-cta">
+    <div class="svc2-cta-glow"></div>
+    <div class="svc2-cta-inner">
+      <div class="svc2-cta-icon">??</div>
+      <h2>Ready for a Healthier Smile?</h2>
+      <p>Join thousands of patients who trust Dent Assist for their dental care.</p>
+      <div class="svc2-cta-btns">
+        <button class="btn-white" onclick="showSection('register')"><i class="fas fa-user-plus"></i> Create Account</button>
+        <button class="btn-ghost" onclick="showSection('dentists-list')"><i class="fas fa-search"></i> Find Dentists</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════ CONTACT ═══════════════════════════════ -->
+<section id="contact" class="section">
+  <div class="page-hero" style="background:linear-gradient(135deg,#0f766e,#0891b2)">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you</p>
+  </div>
+  <div class="section-block">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Get In <span class="gradient-text">Touch</span></h2>
+        <p>Have questions? Our team is here to help you with anything you need.</p>
+        <div class="contact-items">
+          <div class="contact-item"><div class="cicon"><i class="fas fa-map-marker-alt"></i></div><div><strong>Address</strong><span>Dental Appointment Centre</span></div></div>
+          <div class="contact-item"><div class="cicon"><i class="fas fa-phone"></i></div><div><strong>Phone</strong><span>+91 8928099534</span></div></div>
+          <div class="contact-item"><div class="cicon"><i class="fas fa-envelope"></i></div><div><strong>Email</strong><span>tanushree09910@gmail.com</span></div></div>
+          <div class="contact-item"><div class="cicon"><i class="fas fa-clock"></i></div><div><strong>Hours</strong><span>Mon-Sun: 7AM - 10PM</span></div></div>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <form class="contact-form" onsubmit="handleContact(event)">
+          <div class="form-group"><label>Your Name</label><input type="text" placeholder="John Doe" required/></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com" required/></div>
+          <div class="form-group"><label>Subject</label><input type="text" placeholder="How can we help?"/></div>
+          <div class="form-group"><label>Message</label><textarea placeholder="Write your message..." rows="5" required></textarea></div>
+          <button type="submit" class="btn-primary full-width">Send Message <i class="fas fa-paper-plane"></i></button>
+        </form>
+        <div id="contactMsg" class="msg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ AUTH ═══════════════════════════════ -->
+<section id="login" class="section">
+  <div class="auth-page">
+    <div class="auth-left">
+      <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80" alt="Dental"/>
+      <div class="auth-overlay">
+        <h2>Welcome Back!</h2>
+        <p>Login to manage your dental appointments</p>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-form-wrap">
+        <div class="auth-logo"><i class="fas fa-tooth"></i> DentAssist</div>
+        <h2>Sign In</h2>
+        <p class="auth-sub">Enter your credentials to continue</p>
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group"><label>Email Address</label><div class="input-icon"><i class="fas fa-envelope"></i><input type="email" id="loginEmail" placeholder="your@email.com" required/></div></div>
+          <div class="form-group"><label>Password</label><div class="input-icon"><i class="fas fa-lock"></i><input type="password" id="loginPassword" placeholder="Your password" required/></div></div>
+          <button type="submit" class="btn-primary full-width" style="margin-top:1rem">Sign In <i class="fas fa-arrow-right"></i></button>
+        </form>
+        <div id="loginMsg" class="msg"></div>
+        <p class="form-footer">Don't have an account? <a href="#" onclick="showSection('register')">Create one</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="register" class="section">
+  <div class="auth-page">
+    <div class="auth-left">
+      <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&q=80" alt="Dental"/>
+      <div class="auth-overlay">
+        <h2>Join Dent Assist</h2>
+        <p>Your journey to a perfect smile starts here</p>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-form-wrap">
+        <div class="auth-logo"><i class="fas fa-tooth"></i> DentAssist</div>
+        <h2>Create Account</h2>
+        <p class="auth-sub">Fill in your details to get started</p>
+        <form onsubmit="handleRegister(event)">
+          <div class="form-group"><label>Full Name</label><div class="input-icon"><i class="fas fa-user"></i><input type="text" id="regName" placeholder="Your full name" required/></div></div>
+          <div class="form-group"><label>Email</label><div class="input-icon"><i class="fas fa-envelope"></i><input type="email" id="regEmail" placeholder="your@email.com" required/></div></div>
+          <div class="form-group"><label>Password</label><div class="input-icon"><i class="fas fa-lock"></i><input type="password" id="regPassword" placeholder="Create a password" required/></div></div>
+          <div class="form-group"><label>Register As</label><select id="regRole" onchange="toggleRoleFields()"><option value="patient">Patient</option><option value="dentist">Dentist</option></select></div>
+          <div id="patientFields">
+            <div class="form-row">
+              <div class="form-group"><label>Age</label><input type="number" id="regAge" placeholder="Age"/></div>
+              <div class="form-group"><label>Gender</label><select id="regGender"><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></div>
+            </div>
+            <div class="form-group"><label>Location</label><div class="input-icon"><i class="fas fa-map-marker-alt"></i><input type="text" id="regPatientLocation" placeholder="e.g. Mumbai, Maharashtra"/></div></div>
+          </div>
+          <div id="dentistFields" style="display:none">
+            <div class="form-group"><label>Specialization</label><input type="text" id="regSpec" placeholder="e.g. Orthodontics"/></div>
+            <div class="form-group"><label>Location</label><div class="input-icon"><i class="fas fa-map-marker-alt"></i><input type="text" id="regDentistLocation" placeholder="e.g. Mumbai, Maharashtra"/></div></div>
+            <div class="form-group"><label>Available Days</label><input type="text" id="regDays" placeholder="e.g. Mon, Tue, Wed"/></div>
+          </div>
+          <button type="submit" class="btn-primary full-width" style="margin-top:1rem">Create Account <i class="fas fa-arrow-right"></i></button>
+        </form>
+        <div id="registerMsg" class="msg"></div>
+        <p class="form-footer">Already have an account? <a href="#" onclick="showSection('login')">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FIND DENTISTS ═══════════════════════════════ -->
+<section id="dentists-list" class="section">
+  <div class="page-hero" style="background:linear-gradient(135deg,#1e3a8a,#06b6d4)">
+    <h1>Find Your Dentist</h1>
+    <p>Browse our network of verified dental professionals</p>
+    <div class="hero-search">
+      <input type="text" id="searchLocation" placeholder="Search by location (e.g. Mumbai, Delhi)..." oninput="searchDentists()"/>
+      <button class="btn-primary" onclick="searchDentists()"><i class="fas fa-search"></i> Search</button>
+      <button class="btn-ghost" onclick="loadDentists()">Show All</button>
+    </div>
+  </div>
+  <div class="section-block">
+    <div id="dentistCards" class="dentist-cards-grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PATIENT DASHBOARD ═══════════════════════════════ -->
+<section id="patient-dashboard" class="section">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-user"><div class="sidebar-avatar"><i class="fas fa-user"></i></div><div><strong id="sidebarName"></strong><span>Patient</span></div></div>
+      <nav class="sidebar-nav">
+        <a href="#" class="snav active" onclick="switchDash('book-tab',this)"><i class="fas fa-calendar-plus"></i> Book Appointment</a>
+        <a href="#" class="snav" onclick="switchDash('history-tab',this);loadAppointmentHistory()"><i class="fas fa-history"></i> My Appointments</a>
+      </nav>
+    </aside>
+    <main class="dash-main">
+      <div id="book-tab" class="dash-panel active">
+        <div class="dash-header"><h2>Book an Appointment</h2><p>Choose your dentist and preferred time</p></div>
+        <div class="dash-card">
+          <form onsubmit="bookAppointment(event)" class="book-form">
+            <div class="form-group"><label>Select Dentist</label><select id="bookDentist"></select></div>
+            <div class="form-row">
+              <div class="form-group"><label>Date</label><input type="date" id="bookDate" required/></div>
+              <div class="form-group"><label>Time</label>
+                <div class="time-picker-wrap">
+                  <select id="bookHour" class="time-part">
+                    <option value="">HH</option>
+                    <option>1</option><option>2</option><option>3</option><option>4</option>
+                    <option>5</option><option>6</option><option>7</option><option>8</option>
+                    <option>9</option><option>10</option><option>11</option><option>12</option>
+                  </select>
+                  <span class="time-colon">:</span>
+                  <select id="bookMin" class="time-part">
+                    <option value="">MM</option>
+                    <option>00</option><option>15</option><option>30</option><option>45</option>
+                  </select>
+                  <select id="bookAmPm" class="time-ampm">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group"><label>Notes (optional)</label><textarea id="bookNotes" placeholder="Describe your issue or reason for visit..."></textarea></div>
+            <button type="submit" class="btn-primary"><i class="fas fa-calendar-check"></i> Confirm Booking</button>
+          </form>
+          <div id="bookMsg" class="msg"></div>
+        </div>
+      </div>
+      <div id="history-tab" class="dash-panel">
+        <div class="dash-header"><h2>My Appointments</h2><p>View and manage your appointment history</p></div>
+        <div id="appointmentHistory"></div>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ DENTIST DASHBOARD ═══════════════════════════════ -->
+<section id="dentist-dashboard" class="section">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)"><i class="fas fa-user-md"></i></div><div><strong id="dentSidebarName"></strong><span>Dentist</span></div></div>
+      <nav class="sidebar-nav">
+        <a href="#" class="snav active" onclick="switchDash('dentist-appts',this)"><i class="fas fa-calendar-alt"></i> Appointments</a>
+        <a href="#" class="snav" onclick="switchDash('dentist-profile',this)"><i class="fas fa-user-edit"></i> My Profile</a>
+      </nav>
+    </aside>
+    <main class="dash-main">
+      <div id="dentist-appts" class="dash-panel active">
+        <div class="dash-header"><h2>Patient Appointments</h2><p>Manage and respond to appointment requests</p></div>
+        <div id="dentistAppointments"></div>
+      </div>
+      <div id="dentist-profile" class="dash-panel">
+        <div class="dash-header"><h2>Update Profile</h2><p>Keep your availability and info up to date</p></div>
+        <div class="dash-card">
+          <form onsubmit="updateDentistProfile(event)">
+            <div class="form-group"><label>Specialization</label><input type="text" id="dSpecialization" placeholder="e.g. Orthodontics"/></div>
+            <div class="form-group"><label>Location</label><input type="text" id="dLocation" placeholder="e.g. Mumbai, Maharashtra"/></div>
+            <div class="form-group"><label>Available Days</label><input type="text" id="dAvailDays" placeholder="e.g. Mon, Tue, Wed"/></div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Available From</label>
+                <div class="time-picker-wrap">
+                  <select id="dFromHour" class="time-part">
+                    <option value="">HH</option>
+                    <option>1</option><option>2</option><option>3</option><option>4</option>
+                    <option>5</option><option>6</option><option>7</option><option>8</option>
+                    <option>9</option><option>10</option><option>11</option><option>12</option>
+                  </select>
+                  <span class="time-colon">:</span>
+                  <select id="dFromMin" class="time-part">
+                    <option value="">MM</option>
+                    <option>00</option><option>15</option><option>30</option><option>45</option>
+                  </select>
+                  <select id="dFromAmPm" class="time-ampm">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Available To</label>
+                <div class="time-picker-wrap">
+                  <select id="dToHour" class="time-part">
+                    <option value="">HH</option>
+                    <option>1</option><option>2</option><option>3</option><option>4</option>
+                    <option>5</option><option>6</option><option>7</option><option>8</option>
+                    <option>9</option><option>10</option><option>11</option><option>12</option>
+                  </select>
+                  <span class="time-colon">:</span>
+                  <select id="dToMin" class="time-part">
+                    <option value="">MM</option>
+                    <option>00</option><option>15</option><option>30</option><option>45</option>
+                  </select>
+                  <select id="dToAmPm" class="time-ampm">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+          </form>
+          <div id="profileMsg" class="msg"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ ADMIN DASHBOARD ═══════════════════════════════ -->
+<section id="admin-dashboard" class="section">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)"><i class="fas fa-cogs"></i></div><div><strong>Admin</strong><span>Administrator</span></div></div>
+      <nav class="sidebar-nav">
+        <a href="#" class="snav active" onclick="switchDash('admin-overview',this)"><i class="fas fa-chart-bar"></i> Overview</a>
+        <a href="#" class="snav" onclick="switchDash('admin-doctors',this);loadAdminDoctors()"><i class="fas fa-user-md"></i> Doctors</a>
+        <a href="#" class="snav" onclick="switchDash('admin-patients',this);loadAdminPatients()"><i class="fas fa-user"></i> Patients</a>
+        <a href="#" class="snav" onclick="switchDash('admin-appts',this);loadAdminAppointments()"><i class="fas fa-calendar-alt"></i> Appointments</a>
+      </nav>
+    </aside>
+    <main class="dash-main">
+      <div id="admin-overview" class="dash-panel active">
+        <div class="dash-header"><h2>Dashboard Overview</h2><p>System statistics at a glance</p></div>
+        <div id="adminStats" class="stats-grid"></div>
+      </div>
+      <div id="admin-doctors" class="dash-panel">
+        <div class="dash-header"><h2>Doctors</h2><p>All registered dentists</p></div>
+        <div id="doctorsList"></div>
+      </div>
+      <div id="admin-patients" class="dash-panel">
+        <div class="dash-header"><h2>Patients</h2><p>All registered patients</p></div>
+        <div id="patientsList"></div>
+      </div>
+      <div id="admin-appts" class="dash-panel">
+        <div class="dash-header"><h2>All Appointments</h2><p>Complete appointment records</p></div>
+        <div id="allAppointments"></div>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="mainFooter">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand" style="margin-bottom:1rem"><div class="brand-icon"><i class="fas fa-tooth"></i></div><span>Dent<span class="brand-accent">Assist</span></span></div>
+      <p>Making quality dental care accessible to everyone, everywhere.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Quick Links</h4><a href="#" onclick="showSection('home')">Home</a><a href="#" onclick="showSection('about')">About</a><a href="#" onclick="showSection('services')">Services</a><a href="#" onclick="showSection('dentists-list')">Find Dentists</a></div>
+    <div class="footer-col"><h4>How It Works</h4><a href="#" onclick="showSection('services')">Register / Login</a><a href="#" onclick="showSection('services')">Search Dentist</a><a href="#" onclick="showSection('services')">View Profile</a><a href="#" onclick="showSection('services')">Select Date &amp; Time</a><a href="#" onclick="showSection('services')">Confirm Booking</a></div>
+    <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-map-marker-alt"></i> Dental Appointment Centre</p><p><i class="fas fa-phone"></i> +91 8928099534</p><p><i class="fas fa-envelope"></i> tanushree09910@gmail.com</p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 DentAssist. All rights reserved.</p></div>
+</footer>
+
+<!-- ══ CHATBOT ══ -->
+<div id="chatbot-bubble" onclick="toggleChat()">
+  <i class="fas fa-comment-dots" id="chatBubbleIcon"></i>
+</div>
+
+<div id="chatbot-box">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-avatar"><i class="fas fa-tooth"></i></div>
+      <div>
+        <div class="chat-name">DentBot</div>
+        <div class="chat-status"><span class="chat-dot"></span> Online</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-suggestions" id="chatSuggestions"></div>
+  <div class="chat-input-wrap">
+    <input type="text" id="chatInput" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter') sendChat()"/>
+    <button onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
