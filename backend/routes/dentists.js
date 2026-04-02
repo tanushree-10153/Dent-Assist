@@ -20,13 +20,50 @@ router.get('/', async (req, res) => {
 // Search dentists by location
 router.get('/search', async (req, res) => {
   const { location } = req.query;
-  try {
-    const [rows] = await db.query(
+  if (!location) {
+    const [all] = await db.query(
       `SELECT d.dentist_id, u.name, d.specialization, d.location, d.available_days, d.available_from, d.available_to
-       FROM dentists d JOIN users u ON d.user_id = u.user_id
-       WHERE d.location LIKE ?`,
-      [`%${location}%`]
+       FROM dentists d JOIN users u ON d.user_id = u.user_id`
     );
+    return res.json(all);
+  }
+
+  // Mumbai area mapping — searching "Mumbai" matches all its localities but NOT Navi Mumbai
+  const mumbaiAreas = ['andheri','bandra','borivali','dadar','dharavi','ghatkopar','goregaon','juhu','kandivali','kurla','lower parel','malad','matunga','mulund','powai','santacruz','vikhroli','worli','chembur','colaba','fort','jogeshwari','khar','mahim','mira road','vasai','virar','mumbai'];
+
+  const naviMumbaiAreas = ['navi mumbai','vashi','nerul','belapur','kharghar','panvel','airoli','ghansoli','kopar khairane','turbhe','sanpada'];
+
+  const loc = location.toLowerCase().trim();
+  let searchTerms = [loc];
+
+  if (loc === 'mumbai') {
+    // Mumbai search: include all mumbai areas but exclude navi mumbai areas
+    searchTerms = mumbaiAreas;
+  } else if (loc === 'navi mumbai') {
+    searchTerms = naviMumbaiAreas;
+  } else if (mumbaiAreas.includes(loc)) {
+    searchTerms = [loc, 'mumbai'];
+  } else if (naviMumbaiAreas.includes(loc)) {
+    searchTerms = [loc, 'navi mumbai'];
+  }
+
+  try {
+    let query, params;
+    if (loc === 'mumbai') {
+      // Exclude navi mumbai explicitly
+      const conditions = searchTerms.map(() => 'd.location LIKE ?').join(' OR ');
+      params = searchTerms.map(t => `%${t}%`);
+      query = `SELECT d.dentist_id, u.name, d.specialization, d.location, d.available_days, d.available_from, d.available_to
+               FROM dentists d JOIN users u ON d.user_id = u.user_id
+               WHERE (${conditions}) AND d.location NOT LIKE '%navi mumbai%'`;
+    } else {
+      const conditions = searchTerms.map(() => 'd.location LIKE ?').join(' OR ');
+      params = searchTerms.map(t => `%${t}%`);
+      query = `SELECT d.dentist_id, u.name, d.specialization, d.location, d.available_days, d.available_from, d.available_to
+               FROM dentists d JOIN users u ON d.user_id = u.user_id
+               WHERE ${conditions}`;
+    }
+    const [rows] = await db.query(query, params);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
