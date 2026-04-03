@@ -58,7 +58,7 @@ router.get('/appointments', verifyToken, requireRole('admin'), async (req, res) 
        JOIN users up ON p.user_id = up.user_id
        JOIN dentists d ON a.dentist_id = d.dentist_id
        JOIN users ud ON d.user_id = ud.user_id
-       ORDER BY a.appointment_date DESC`
+       ORDER BY a.appointment_id ASC`
     );
     res.json(rows);
   } catch (err) {
