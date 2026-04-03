@@ -39,6 +39,7 @@
     .glass { background:rgba(255,255,255,0.08); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); }
     .gradient-border { position:relative; }
     .gradient-border::before { content:''; position:absolute; inset:-2px; background:linear-gradient(135deg,#2563eb,#06b6d4,#7c3aed); border-radius:inherit; z-index:-1; }
+    @media (max-width: 640px) { .trust-divider { display:none; } }
   </style>
 </head>
 <body>
@@ -156,13 +157,13 @@
     </div>
     <!-- bottom trust bar -->
     <div style="margin-top:3rem;background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:20px;padding:2rem 3rem;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:1.5rem;">
-      <div style="display:flex;align-items:center;gap:12px;color:white;"><i class="fas fa-shield-alt" style="font-size:1.5rem;color:#34d399;"></i><div><div style="font-weight:700;font-size:0.95rem;">100% Secure</div><div style="font-size:0.8rem;opacity:0.7;">Your data is safe with us</div></div></div>
-      <div style="width:1px;height:40px;background:rgba(255,255,255,0.2);"></div>
-      <div style="display:flex;align-items:center;gap:12px;color:white;"><i class="fas fa-user-md" style="font-size:1.5rem;color:#60a5fa;"></i><div><div style="font-weight:700;font-size:0.95rem;">Verified Doctors</div><div style="font-size:0.8rem;opacity:0.7;">All dentists are certified</div></div></div>
-      <div style="width:1px;height:40px;background:rgba(255,255,255,0.2);"></div>
-      <div style="display:flex;align-items:center;gap:12px;color:white;"><i class="fas fa-clock" style="font-size:1.5rem;color:#fbbf24;"></i><div><div style="font-weight:700;font-size:0.95rem;">Instant Booking</div><div style="font-size:0.8rem;opacity:0.7;">Confirm in under a minute</div></div></div>
-      <div style="width:1px;height:40px;background:rgba(255,255,255,0.2);"></div>
-      <div style="display:flex;align-items:center;gap:12px;color:white;"><i class="fas fa-tooth" style="font-size:1.5rem;color:#f9a8d4;"></i><div><div style="font-weight:700;font-size:0.95rem;">All Specializations</div><div style="font-size:0.8rem;opacity:0.7;">From general to cosmetic</div></div></div>
+      <div style="display:flex;align-items:center;gap:12px;color:white;min-width:160px;"><i class="fas fa-shield-alt" style="font-size:1.5rem;color:#34d399;"></i><div><div style="font-weight:700;font-size:0.95rem;">100% Secure</div><div style="font-size:0.8rem;opacity:0.7;">Your data is safe with us</div></div></div>
+      <div class="trust-divider" style="width:1px;height:40px;background:rgba(255,255,255,0.2);"></div>
+      <div style="display:flex;align-items:center;gap:12px;color:white;min-width:160px;"><i class="fas fa-user-md" style="font-size:1.5rem;color:#60a5fa;"></i><div><div style="font-weight:700;font-size:0.95rem;">Verified Doctors</div><div style="font-size:0.8rem;opacity:0.7;">All dentists are certified</div></div></div>
+      <div class="trust-divider" style="width:1px;height:40px;background:rgba(255,255,255,0.2);"></div>
+      <div style="display:flex;align-items:center;gap:12px;color:white;min-width:160px;"><i class="fas fa-clock" style="font-size:1.5rem;color:#fbbf24;"></i><div><div style="font-weight:700;font-size:0.95rem;">Instant Booking</div><div style="font-size:0.8rem;opacity:0.7;">Confirm in under a minute</div></div></div>
+      <div class="trust-divider" style="width:1px;height:40px;background:rgba(255,255,255,0.2);"></div>
+      <div style="display:flex;align-items:center;gap:12px;color:white;min-width:160px;"><i class="fas fa-tooth" style="font-size:1.5rem;color:#f9a8d4;"></i><div><div style="font-weight:700;font-size:0.95rem;">All Specializations</div><div style="font-size:0.8rem;opacity:0.7;">From general to cosmetic</div></div></div>
     </div>
   </div>
   <div class="section-block" id="reviewsSection">
