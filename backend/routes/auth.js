@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
 
     res.status(201).json({ message: 'Registered successfully' });
     // Send welcome email (non-blocking)
-    sendWelcome(email, name, role).catch(() => {});
+    sendWelcome(email, name, role).catch((err) => console.error('Email error:', err.message));
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY')
       return res.status(409).json({ message: 'Email already exists' });
