@@ -29,7 +29,7 @@ router.get('/users', verifyToken, requireRole('admin'), async (req, res) => {
       FROM users u
       LEFT JOIN patients p ON p.user_id = u.user_id
       LEFT JOIN dentists d ON d.user_id = u.user_id
-      ORDER BY u.created_at DESC
+      ORDER BY u.created_at ASC
     `);
     res.json(rows);
   } catch (err) {
