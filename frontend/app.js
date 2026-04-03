@@ -1,6 +1,6 @@
 ﻿const API = window.location.hostname === 'localhost'
   ? 'http://localhost:5000/api'
-  : 'https://dent-assist-api.onrender.com/api';
+  : 'https://tranquil-trust-production-6641.up.railway.app/api';
 let token = localStorage.getItem('token');
 let userRole = localStorage.getItem('role');
 let userName = localStorage.getItem('name');
