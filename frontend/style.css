@@ -291,7 +291,7 @@ body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--t
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
   gap: 0;
-  align-items: start;
+  align-items: stretch;
   padding: 4rem 4%;
   background: #f8faff;
 }
@@ -317,7 +317,10 @@ body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--t
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
+.svc2-card button { margin-top: auto; }
 .svc2-card::before {
   content: '';
   position: absolute;
@@ -502,7 +505,7 @@ body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--t
 .msg.error { background: #fee2e2; color: #991b1b; display: block; }
 
 /* ── DENTIST CARDS ── */
-.dentist-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 2rem; }
+.dentist-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 2rem; align-items: stretch; }
 
 .dcard {
   background: white;
@@ -511,7 +514,11 @@ body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--t
   box-shadow: 0 4px 24px rgba(37,99,235,0.10);
   border: 1px solid #e8eef8;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
+.dcard-body { padding: 1.8rem 1.5rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
+.dcard-book-btn { margin-top: auto; }
 .dcard:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(37,99,235,0.18); }
 
 .dcard-header {
@@ -1082,6 +1089,7 @@ tr:hover td { background: #f8faff; }
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 2rem;
+  align-items: stretch;
 }
 .about-dentist-loading {
   grid-column: 1/-1;
@@ -1098,7 +1106,11 @@ tr:hover td { background: #f8faff; }
   border: 1px solid #e8eef8;
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
+.about-dcard-body { display: flex; flex-direction: column; flex: 1; }
+.about-dcard-book { margin-top: auto; }
 .about-dcard:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(37,99,235,0.16); }
 
 .about-dcard-banner {
