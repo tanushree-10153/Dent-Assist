@@ -50,6 +50,13 @@ function showSection(id) {
     var pub = ['home','about','services','contact','dentists-list'];
     footer.style.display = pub.indexOf(id) >= 0 ? 'block' : 'none';
   }
+  // Update active nav link
+  var navMap = { 'home': 0, 'about': 1, 'services': 2, 'dentists-list': 3, 'contact': 4 };
+  document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
+  if (navMap[id] !== undefined) {
+    var links = document.querySelectorAll('.nav-links a');
+    if (links[navMap[id]]) links[navMap[id]].classList.add('active');
+  }
   if (id === 'dentists-list') loadDentists();
   if (id === 'about') loadAboutDentists();
   window.scrollTo(0,0);
