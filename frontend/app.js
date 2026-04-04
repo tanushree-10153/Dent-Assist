@@ -5,6 +5,30 @@ let token = localStorage.getItem('token');
 let userRole = localStorage.getItem('role');
 let userName = localStorage.getItem('name');
 
+// Doctor photo pools
+var maleDoctorPhotos = [
+  'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&q=80',
+  'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&q=80',
+  'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&q=80',
+  'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=200&q=80',
+  'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=200&q=80'
+];
+var femaleDoctorPhotos = [
+  'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&q=80',
+  'https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=200&q=80',
+  'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=200&q=80',
+  'https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=200&q=80',
+  'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=200&q=80'
+];
+var femaleNames = ['sanika','tanushree','tanvi','priya','pooja','neha','anjali','sneha','kavya','divya','riya','ananya','shreya','meera','nisha','sonal','rekha','sunita','geeta','lata','asha','usha','radha','sita','gita','puja','swati','shweta','pallavi','madhuri','deepa','seema','reena','mona','sonia','rita','anita','sunita','kavita','lalita','mamta','vandana','archana','kiran','shobha','usha','rani','devi','lakshmi','saraswati'];
+
+function getDoctorPhoto(name, index) {
+  var firstName = name.split(' ')[0].toLowerCase();
+  var isFemale = femaleNames.some(function(fn) { return firstName.includes(fn); });
+  var pool = isFemale ? femaleDoctorPhotos : maleDoctorPhotos;
+  return pool[index % pool.length];
+}
+
 window.onload = function() {
   updateNav();
   if (token) {
@@ -168,11 +192,12 @@ async function loadAboutDentists() {
     }
     grid.innerHTML = dentists.map(function(d, i) {
       var grad = gradients[i % gradients.length];
+      var photo = getDoctorPhoto(d.name, i);
       var timeStr = d.available_from ? formatTime(d.available_from) + ' – ' + formatTime(d.available_to) : null;
       return '<div class="about-dcard">'
         + '<div class="about-dcard-banner" style="background:' + grad + '"></div>'
-        + '<div class="about-dcard-avatar" style="background:' + grad + '">'
-        + '<i class="fas fa-user-md" style="color:white;font-size:2rem;"></i></div>'
+        + '<div class="about-dcard-avatar" style="background:none;overflow:hidden;">'
+        + '<img src="' + photo + '" alt="Dr. ' + d.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/></div>'
         + '<div class="about-dcard-body">'
         + '<h3>Dr. ' + d.name + '</h3>'
         + '<span class="about-dcard-spec">' + (d.specialization || 'General Dentistry') + '</span>'
@@ -226,13 +251,14 @@ function renderDentistCards(dentists) {
     var d = dentists[i];
     var grad = gradients[i % gradients.length];
     var timeStr = d.available_from ? formatTime(d.available_from) + ' – ' + formatTime(d.available_to) : 'Flexible hours';
+    var photo = getDoctorPhoto(d.name, i);
     var bookBtn = (token && userRole === 'patient')
       ? '<button onclick="prefillBooking(' + d.dentist_id + ')" class="dcard-book-btn"><i class="fas fa-calendar-plus"></i> Book Appointment</button>'
       : '<button onclick="showSection(\'register\')" class="dcard-book-btn"><i class="fas fa-calendar-plus"></i> Book Appointment</button>';
     html += '<div class="dcard">'
       + '<div class="dcard-header" style="background:' + grad + '">'
       + '<div class="dcard-tooth">🦷</div>'
-      + '<div class="dcard-avatar"><i class="fas fa-user-md"></i></div>'
+      + '<div class="dcard-avatar" style="background:none;overflow:hidden;"><img src="' + photo + '" alt="Dr. ' + d.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/></div>'
       + '<h3 class="dcard-name">Dr. ' + d.name + '</h3>'
       + '<span class="dcard-spec">' + (d.specialization || 'General Dentistry') + '</span>'
       + '</div>'
