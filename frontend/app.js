@@ -5,30 +5,30 @@ let token = localStorage.getItem('token');
 let userRole = localStorage.getItem('role');
 let userName = localStorage.getItem('name');
 
-// Doctor photo pools - unique Indian doctor images, no repeats
+// Doctor photo pools - clean portrait headshots, guaranteed correct
 var maleDoctorPhotos = [
-  'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&q=80',
-  'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&q=80',
-  'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&q=80',
-  'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=200&q=80',
-  'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=200&q=80',
-  'https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=200&q=80',
-  'https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=200&q=80',
-  'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=200&q=80',
-  'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=200&q=80',
-  'https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=200&q=80'
+  'https://randomuser.me/api/portraits/men/32.jpg',
+  'https://randomuser.me/api/portraits/men/45.jpg',
+  'https://randomuser.me/api/portraits/men/52.jpg',
+  'https://randomuser.me/api/portraits/men/61.jpg',
+  'https://randomuser.me/api/portraits/men/74.jpg',
+  'https://randomuser.me/api/portraits/men/83.jpg',
+  'https://randomuser.me/api/portraits/men/91.jpg',
+  'https://randomuser.me/api/portraits/men/22.jpg',
+  'https://randomuser.me/api/portraits/men/36.jpg',
+  'https://randomuser.me/api/portraits/men/48.jpg'
 ];
 var femaleDoctorPhotos = [
-  'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&q=80',
-  'https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=200&q=80',
-  'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=200&q=80',
-  'https://images.unsplash.com/photo-1643297654416-05795d62e39c?w=200&q=80',
-  'https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?w=200&q=80',
-  'https://images.unsplash.com/photo-1623854767648-e7bb8009f0db?w=200&q=80',
-  'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=200&q=80',
-  'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=200&q=80',
-  'https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=200&q=80',
-  'https://images.unsplash.com/photo-1651008376811-b90baee60c1f?w=200&q=80'
+  'https://randomuser.me/api/portraits/women/44.jpg',
+  'https://randomuser.me/api/portraits/women/55.jpg',
+  'https://randomuser.me/api/portraits/women/63.jpg',
+  'https://randomuser.me/api/portraits/women/72.jpg',
+  'https://randomuser.me/api/portraits/women/81.jpg',
+  'https://randomuser.me/api/portraits/women/33.jpg',
+  'https://randomuser.me/api/portraits/women/26.jpg',
+  'https://randomuser.me/api/portraits/women/47.jpg',
+  'https://randomuser.me/api/portraits/women/58.jpg',
+  'https://randomuser.me/api/portraits/women/68.jpg'
 ];
 var femaleNames = ['sanika','tanushree','tanvi','priya','pooja','neha','anjali','sneha','kavya','divya','riya','ananya','shreya','meera','nisha','sonal','rekha','sunita','geeta','lata','asha','usha','radha','sita','gita','puja','swati','shweta','pallavi','madhuri','deepa','seema','reena','mona','sonia','rita','anita','sunita','kavita','lalita','mamta','vandana','archana','kiran','shobha','usha','rani','devi','lakshmi','saraswati'];
 
