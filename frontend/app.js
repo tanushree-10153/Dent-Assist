@@ -5,30 +5,30 @@ let token = localStorage.getItem('token');
 let userRole = localStorage.getItem('role');
 let userName = localStorage.getItem('name');
 
-// Doctor photo pools - clean portrait headshots, guaranteed correct
+// Doctor photo pools - unique Indian doctor images, no repeats
 var maleDoctorPhotos = [
-  'https://randomuser.me/api/portraits/men/32.jpg',
-  'https://randomuser.me/api/portraits/men/45.jpg',
-  'https://randomuser.me/api/portraits/men/52.jpg',
-  'https://randomuser.me/api/portraits/men/61.jpg',
-  'https://randomuser.me/api/portraits/men/74.jpg',
-  'https://randomuser.me/api/portraits/men/83.jpg',
-  'https://randomuser.me/api/portraits/men/91.jpg',
-  'https://randomuser.me/api/portraits/men/22.jpg',
-  'https://randomuser.me/api/portraits/men/36.jpg',
-  'https://randomuser.me/api/portraits/men/48.jpg'
+  'https://img.freepik.com/free-photo/portrait-smiling-male-doctor_171337-1532.jpg?w=200',
+  'https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg?w=200',
+  'https://img.freepik.com/free-photo/medium-shot-smiley-doctor-with-stethoscope_23-2149368529.jpg?w=200',
+  'https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg?w=200',
+  'https://img.freepik.com/free-photo/front-view-male-doctor-with-stethoscope_23-2148946194.jpg?w=200',
+  'https://img.freepik.com/free-photo/doctor-standing-with-folder-stethoscope_1291-16.jpg?w=200',
+  'https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?w=200',
+  'https://img.freepik.com/free-photo/portrait-doctor_144627-39390.jpg?w=200',
+  'https://img.freepik.com/free-photo/attractive-male-doctor-pointing-up_23-2148445082.jpg?w=200',
+  'https://img.freepik.com/free-photo/young-handsome-physician-medical-robe-with-stethoscope_1303-17818.jpg?w=200'
 ];
 var femaleDoctorPhotos = [
-  'https://randomuser.me/api/portraits/women/44.jpg',
-  'https://randomuser.me/api/portraits/women/55.jpg',
-  'https://randomuser.me/api/portraits/women/63.jpg',
-  'https://randomuser.me/api/portraits/women/72.jpg',
-  'https://randomuser.me/api/portraits/women/81.jpg',
-  'https://randomuser.me/api/portraits/women/33.jpg',
-  'https://randomuser.me/api/portraits/women/26.jpg',
-  'https://randomuser.me/api/portraits/women/47.jpg',
-  'https://randomuser.me/api/portraits/women/58.jpg',
-  'https://randomuser.me/api/portraits/women/68.jpg'
+  'https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg?w=200',
+  'https://img.freepik.com/free-photo/portrait-smiling-young-woman-doctor-healthcare-medical-worker-pointing-fingers-sideways_1258-88108.jpg?w=200',
+  'https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827776.jpg?w=200',
+  'https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg?w=200',
+  'https://img.freepik.com/free-photo/medium-shot-smiley-doctor-outdoors_23-2149368547.jpg?w=200',
+  'https://img.freepik.com/free-photo/front-view-female-doctor-with-stethoscope_23-2148946204.jpg?w=200',
+  'https://img.freepik.com/free-photo/beautiful-young-female-doctor-looking-camera-office_1301-7807.jpg?w=200',
+  'https://img.freepik.com/free-photo/portrait-young-female-doctor_23-2148999801.jpg?w=200',
+  'https://img.freepik.com/free-photo/doctor-standing-with-folder-stethoscope_1291-17.jpg?w=200',
+  'https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-975.jpg?w=200'
 ];
 var femaleNames = ['sanika','tanushree','tanvi','priya','pooja','neha','anjali','sneha','kavya','divya','riya','ananya','shreya','meera','nisha','sonal','rekha','sunita','geeta','lata','asha','usha','radha','sita','gita','puja','swati','shweta','pallavi','madhuri','deepa','seema','reena','mona','sonia','rita','anita','sunita','kavita','lalita','mamta','vandana','archana','kiran','shobha','usha','rani','devi','lakshmi','saraswati'];
 
