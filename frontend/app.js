@@ -208,24 +208,22 @@ async function loadAboutDentists() {
     resetPhotoCounters();
     grid.innerHTML = dentists.map(function(d, i) {
       var grad = gradients[i % gradients.length];
+      var photo = getDoctorPhoto(d.name);
       var timeStr = d.available_from ? formatTime(d.available_from) + ' – ' + formatTime(d.available_to) : null;
-      return '<div class="about-dcard">'
-        + '<div class="about-dcard-banner" style="background:' + grad + ';display:flex;align-items:center;justify-content:center;padding:1.5rem;">'
-        + '<div style="width:60px;height:60px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;">'
-        + '<i class="fas fa-user-md" style="color:white;font-size:1.6rem;"></i></div></div>'
-        + '<div class="about-dcard-body">'
-        + '<h3>Dr. ' + d.name + '</h3>'
-        + '<span class="about-dcard-spec">' + (d.specialization || 'General Dentistry') + '</span>'
-        + '<div class="about-dcard-info">'
-        + (d.location ? '<span><i class="fas fa-map-marker-alt"></i>' + d.location + '</span>' : '')
-        + (d.available_days ? '<span><i class="fas fa-calendar-alt"></i>' + d.available_days + '</span>' : '')
-        + (timeStr ? '<span><i class="fas fa-clock"></i>' + timeStr + '</span>' : '')
+      return '<div class="team-card">'
+        + '<div class="team-card-left" style="background:' + grad + '">'
+        + '<img src="' + photo + '" alt="Dr. ' + d.name + '" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,0.5);"/>'
+        + '<div class="team-card-name">Dr. ' + d.name + '</div>'
+        + '<div class="team-card-spec">' + (d.specialization || 'General Dentistry') + '</div>'
         + '</div>'
-        + '<div class="about-dcard-verified"><i class="fas fa-shield-check"></i> Verified Professional</div>'
-        + '<div class="dcard-stars">★★★★★</div>'
-        + '<button class="about-dcard-book" onclick="showSection(\'dentists-list\')">'
-        + '<i class="fas fa-calendar-plus"></i> Book Appointment</button>'
-        + '</div></div>';
+        + '<div class="team-card-right">'
+        + (d.location ? '<div class="team-info-row"><i class="fas fa-map-marker-alt"></i><span>' + d.location + '</span></div>' : '')
+        + (d.available_days ? '<div class="team-info-row"><i class="fas fa-calendar-alt"></i><span>' + d.available_days + '</span></div>' : '')
+        + (timeStr ? '<div class="team-info-row"><i class="fas fa-clock"></i><span>' + timeStr + '</span></div>' : '')
+        + '<div class="team-info-row verified-row"><i class="fas fa-shield-check"></i><span>Verified Professional</span></div>'
+        + '<div style="color:#f59e0b;font-size:0.9rem;margin-top:0.5rem;">★★★★★</div>'
+        + '</div>'
+        + '</div>';
     }).join('');
   } catch(err) {
     grid.innerHTML = '<div class="about-dentist-loading">Could not load specialists.</div>';
