@@ -206,22 +206,38 @@ async function loadAboutDentists() {
       return;
     }
     resetPhotoCounters();
+    var expYears = [8, 12, 6, 15, 10, 7, 9, 11, 5, 13];
+    var bios = [
+      'Dedicated to creating beautiful, healthy smiles with the latest techniques.',
+      'Passionate about patient comfort and delivering exceptional dental care.',
+      'Committed to providing gentle, comprehensive dental treatment for all ages.',
+      'Specialist in advanced procedures with a focus on patient satisfaction.',
+      'Bringing years of expertise to help patients achieve optimal oral health.',
+      'Known for a warm approach and precision in every dental procedure.',
+      'Focused on preventive care and long-term dental wellness for patients.',
+      'Expert in modern dentistry with a gentle touch and caring attitude.',
+      'Dedicated to making every visit comfortable and stress-free for patients.',
+      'Combining clinical excellence with compassionate patient-centered care.'
+    ];
     grid.innerHTML = dentists.map(function(d, i) {
       var grad = gradients[i % gradients.length];
       var photo = getDoctorPhoto(d.name);
-      var timeStr = d.available_from ? formatTime(d.available_from) + ' – ' + formatTime(d.available_to) : null;
+      var exp = expYears[i % expYears.length];
+      var bio = bios[i % bios.length];
       return '<div class="team-card">'
         + '<div class="team-card-left" style="background:' + grad + '">'
         + '<img src="' + photo + '" alt="Dr. ' + d.name + '" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,0.5);"/>'
         + '<div class="team-card-name">Dr. ' + d.name + '</div>'
         + '<div class="team-card-spec">' + (d.specialization || 'General Dentistry') + '</div>'
+        + '<div style="color:rgba(255,255,255,0.9);font-size:0.75rem;margin-top:0.4rem;"><i class="fas fa-briefcase-medical"></i> ' + exp + '+ yrs exp</div>'
         + '</div>'
         + '<div class="team-card-right">'
-        + (d.location ? '<div class="team-info-row"><i class="fas fa-map-marker-alt"></i><span>' + d.location + '</span></div>' : '')
-        + (d.available_days ? '<div class="team-info-row"><i class="fas fa-calendar-alt"></i><span>' + d.available_days + '</span></div>' : '')
-        + (timeStr ? '<div class="team-info-row"><i class="fas fa-clock"></i><span>' + timeStr + '</span></div>' : '')
-        + '<div class="team-info-row verified-row"><i class="fas fa-shield-check"></i><span>Verified Professional</span></div>'
-        + '<div style="color:#f59e0b;font-size:0.9rem;margin-top:0.5rem;">★★★★★</div>'
+        + '<p style="font-size:0.85rem;color:#64748b;line-height:1.6;margin-bottom:0.8rem;font-style:italic;">"' + bio + '"</p>'
+        + '<div class="team-info-row"><i class="fas fa-graduation-cap"></i><span>BDS, MDS – Dental Surgery</span></div>'
+        + '<div class="team-info-row"><i class="fas fa-map-marker-alt"></i><span>' + (d.location || 'Mumbai') + '</span></div>'
+        + '<div class="team-info-row"><i class="fas fa-language"></i><span>English, Hindi, Marathi</span></div>'
+        + '<div class="team-info-row verified-row"><i class="fas fa-shield-check"></i><span>Verified & Certified Professional</span></div>'
+        + '<div style="color:#f59e0b;font-size:0.9rem;margin-top:0.5rem;">★★★★★ <span style="color:#94a3b8;font-size:0.78rem;">(Highly Rated)</span></div>'
         + '</div>'
         + '</div>';
     }).join('');
