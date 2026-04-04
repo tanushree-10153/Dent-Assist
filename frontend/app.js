@@ -208,12 +208,11 @@ async function loadAboutDentists() {
     resetPhotoCounters();
     grid.innerHTML = dentists.map(function(d, i) {
       var grad = gradients[i % gradients.length];
-      var photo = getDoctorPhoto(d.name);
       var timeStr = d.available_from ? formatTime(d.available_from) + ' – ' + formatTime(d.available_to) : null;
       return '<div class="about-dcard">'
-        + '<div class="about-dcard-banner" style="background:' + grad + '"></div>'
-        + '<div class="about-dcard-avatar" style="background:none;overflow:hidden;">'
-        + '<img src="' + photo + '" alt="Dr. ' + d.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/></div>'
+        + '<div class="about-dcard-banner" style="background:' + grad + ';display:flex;align-items:center;justify-content:center;padding:1.5rem;">'
+        + '<div style="width:60px;height:60px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;">'
+        + '<i class="fas fa-user-md" style="color:white;font-size:1.6rem;"></i></div></div>'
         + '<div class="about-dcard-body">'
         + '<h3>Dr. ' + d.name + '</h3>'
         + '<span class="about-dcard-spec">' + (d.specialization || 'General Dentistry') + '</span>'
