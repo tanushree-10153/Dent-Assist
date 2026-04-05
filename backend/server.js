@@ -5,12 +5,22 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors({
-  origin: [
-    'http://localhost:5000',
-    'http://localhost:3000',
-    process.env.FRONTEND_URL,
-    'https://dent-assist-git-main-tanushree-10153s-projects.vercel.app'
-  ].filter(Boolean),
+  origin: function(origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    const allowed = [
+      'http://localhost:5000',
+      'http://localhost:3000',
+      process.env.FRONTEND_URL,
+      'https://dent-assist-theta.vercel.app',
+      'https://dent-assist-git-main-tanushree-10153s-projects.vercel.app'
+    ].filter(Boolean);
+    if (allowed.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(null, true); // temporarily allow all for debugging
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
