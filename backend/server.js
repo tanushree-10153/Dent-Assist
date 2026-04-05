@@ -4,7 +4,15 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5000',
+    'http://localhost:3000',
+    'https://dent-assist-theta.vercel.app',
+    'https://dent-assist-git-main-tanushree-10153s-projects.vercel.app'
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth'));
