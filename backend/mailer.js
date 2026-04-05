@@ -1,13 +1,20 @@
-const { Resend } = require('resend');
+const nodemailer = require('nodemailer');
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: 'in-v3.mailjet.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.MAILJET_API_KEY,
+    pass: process.env.MAILJET_SECRET_KEY
+  },
+  tls: { rejectUnauthorized: false }
+});
 
 async function sendMail(to, subject, html) {
-  // Resend free tier: can only send to verified email unless domain is verified
-  const recipient = process.env.RESEND_VERIFIED_EMAIL || to;
-  return resend.emails.send({
-    from: 'DentAssist <onboarding@resend.dev>',
-    to: recipient,
+  return transporter.sendMail({
+    from: '"DentAssist" <tanushree09910@gmail.com>',
+    to,
     subject,
     html
   });
