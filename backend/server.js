@@ -8,9 +8,9 @@ app.use(cors({
   origin: [
     'http://localhost:5000',
     'http://localhost:3000',
-    'https://dent-assist-theta.vercel.app',
+    process.env.FRONTEND_URL,
     'https://dent-assist-git-main-tanushree-10153s-projects.vercel.app'
-  ],
+  ].filter(Boolean),
   credentials: true
 }));
 app.use(express.json());
