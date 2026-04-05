@@ -133,10 +133,24 @@ function toggleMenu() {
   if (nav) nav.classList.toggle('open');
 }
 
-function handleContact(e) {
+async function handleContact(e) {
   e.preventDefault();
-  showMsg('contactMsg', 'Message sent! We will get back to you soon.', 'success');
-  e.target.reset();
+  var name = document.getElementById('contactName').value;
+  var email = document.getElementById('contactEmail').value;
+  var subject = document.getElementById('contactSubject').value || 'Contact Form Message';
+  var message = document.getElementById('contactMessage').value;
+  try {
+    var res = await fetch(API + '/auth/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, subject, message })
+    });
+    var data = await res.json();
+    showMsg('contactMsg', res.ok ? 'Message sent! We will get back to you soon.' : (data.message || 'Failed to send.'), res.ok ? 'success' : 'error');
+    if (res.ok) e.target.reset();
+  } catch(err) {
+    showMsg('contactMsg', 'Connection error. Please try again.', 'error');
+  }
 }
 
 function logout() {

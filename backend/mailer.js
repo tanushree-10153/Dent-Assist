@@ -96,4 +96,4 @@ function sendAppointmentApproved(to, patientName, dentistName, date, time) {
   return sendMail(to, 'Appointment Confirmed – DentAssist ✅', html);
 }
 
-module.exports = { sendWelcome, sendAppointmentBooked, sendAppointmentApproved };
+module.exports = { sendMail, sendWelcome, sendAppointmentBooked, sendAppointmentApproved };

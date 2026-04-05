@@ -65,4 +65,29 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Contact form
+router.post('/contact', async (req, res) => {
+  const { name, email, subject, message } = req.body;
+  if (!name || !email || !message) return res.status(400).json({ message: 'Name, email and message are required.' });
+  try {
+    const { sendMail } = require('../mailer');
+    await sendMail(
+      process.env.EMAIL_USER,
+      `Contact Form: ${subject || 'New Message'}`,
+      `<div style="font-family:sans-serif;padding:1.5rem;">
+        <h2 style="color:#2563eb;">New Contact Message</h2>
+        <p><strong>From:</strong> ${name} (${email})</p>
+        <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
+        <hr/>
+        <p><strong>Message:</strong></p>
+        <p style="line-height:1.7;">${message}</p>
+      </div>`
+    );
+    res.json({ message: 'Message sent successfully.' });
+  } catch (err) {
+    console.error('Contact email error:', err.message);
+    res.status(500).json({ message: 'Failed to send message.' });
+  }
+});
+
 module.exports = router;
