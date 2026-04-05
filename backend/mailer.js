@@ -1,25 +1,13 @@
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-function sendMail(to, subject, html) {
-  return transporter.sendMail({
-    from: `"DentAssist" <${process.env.EMAIL_USER}>`,
-    to,
+async function sendMail(to, subject, html) {
+  // Resend free tier: can only send to verified email unless domain is verified
+  const recipient = process.env.RESEND_VERIFIED_EMAIL || to;
+  return resend.emails.send({
+    from: 'DentAssist <onboarding@resend.dev>',
+    to: recipient,
     subject,
     html
   });
