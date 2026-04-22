@@ -17,7 +17,7 @@ npm start
 Server runs on http://localhost:5000
 
 ### 3. Frontend
-Open `frontend/index.html` directly in a browser.
+Open `frontend/index.html` in a browser.
 (Or use Live Server extension in VS Code)
 
 ## Tech Stack
