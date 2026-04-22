@@ -1,16 +1,19 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'in-v3.mailjet.com',
+  port: 587,
+  secure: false,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+    user: process.env.MAILJET_API_KEY,
+    pass: process.env.MAILJET_SECRET_KEY
+  },
+  tls: { rejectUnauthorized: false }
 });
 
-function sendMail(to, subject, html) {
+async function sendMail(to, subject, html) {
   return transporter.sendMail({
-    from: `"DentAssist" <${process.env.EMAIL_USER}>`,
+    from: '"DentAssist" <tanushree09910@gmail.com>',
     to,
     subject,
     html
